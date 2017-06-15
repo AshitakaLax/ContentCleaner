@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using OSDBnet;
 
 namespace ContentCleaner
 {
@@ -15,6 +16,36 @@ namespace ContentCleaner
     public Form1()
     {
       InitializeComponent();
+    }
+
+    private void label1_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    private void openInputFileLocation_Click(object sender, EventArgs e)
+    {
+      OpenFileDialog openDialog = new OpenFileDialog();
+      openDialog.Filter = "MP4 (*.mp4|*.mp4|All files (*.*)|*.*";
+      if( openDialog.ShowDialog() == DialogResult.OK)
+      {
+        this.InputFileTextBox.Text = openDialog.FileName;
+      }
+    }
+
+    private void outputFileButton_Click(object sender, EventArgs e)
+    {
+      OpenFileDialog openDialog = new OpenFileDialog();
+      openDialog.Filter = "MP4 (*.mp4|*.mp4|All files (*.*)|*.*";
+      if (openDialog.ShowDialog() == DialogResult.OK)
+      {
+        this.outputFileTextBox.Text = openDialog.FileName;
+      }
+    }
+
+    private void FetchButton_Click(object sender, EventArgs e)
+    {
+      //Osdb.Login()
     }
   }
 }
