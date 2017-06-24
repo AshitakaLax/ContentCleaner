@@ -58,8 +58,8 @@ namespace ContentCleaner
       int episode = int.Parse(this.episodeTextBox.Text);
       IList<Subtitle> results = client.SearchSubtitlesFromQuery("en", this.showTextBox.Text, season, episode);
 
-
-      client.DownloadSubtitleToPath(this.outputFileTextBox.Text, results[0]);
+      List<Subtitle> filteredResults = new List<Subtitle>(results.Where((x) => x.LanguageId == "eng"));
+      client.DownloadSubtitleToPath(this.outputFileTextBox.Text, filteredResults[0]);
 
       MediaFile inputFile = new MediaFile(this.InputFileTextBox.Text);
       string tempOutputFile = Path.ChangeExtension(this.InputFileTextBox.Text, "wav");
@@ -69,6 +69,18 @@ namespace ContentCleaner
       {
         engine.Convert(inputFile, outputFile);
       }
+    }
+
+    public string FetchSubtitle(string user, string password, string userAgent, string subDirectory, string series, int season, int episode)
+    {
+      // May want to update to support multiple languages
+      IAnonymousClient client = Osdb.Login(user, password, "en", userAgent);
+      IList<Subtitle> results = client.SearchSubtitlesFromQuery("en", series, season, episode);
+
+      List<Subtitle> filteredResults = new List<Subtitle>(results.Where((x) => x.LanguageId == "eng"));
+      client.DownloadSubtitleToPath(subDirectory, filteredResults[0]);
+      string subtitleFile = Path.Combine(subDirectory, filteredResults[0].SubtitleFileName);
+      return subtitleFile;
     }
   }
 }
