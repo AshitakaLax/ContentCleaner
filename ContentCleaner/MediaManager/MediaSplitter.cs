@@ -55,17 +55,20 @@ namespace ContentCleaner.MediaManager
       using (FileStream stream = File.OpenRead(this.SrtSubtitleFile))
       {
         subtitles = parser.ParseStream(stream,System.Text.Encoding.UTF8);
-
+        string originalFilenameWithoutExtension = Path.Combine(Path.GetDirectoryName(this.OriginalContent.Filename), Path.GetFileNameWithoutExtension(this.OriginalContent.Filename));
 
         foreach (SubtitleItem item in subtitles)
         {
+          int itemIndex = subtitles.IndexOf(item);
+          string outputWavFile = originalFilenameWithoutExtension + itemIndex + ".wav";
+
           // based on the Item Create a new media file for use
           using (Engine engine = new Engine())
           {
             ConversionOptions opts = new ConversionOptions();
             int durationMilliseconds = item.EndTime - item.StartTime;
             opts.CutMedia(TimeSpan.FromMilliseconds(item.StartTime), TimeSpan.FromMilliseconds(durationMilliseconds));
-            MediaFile outputFile = new MediaFile(Path.ChangeExtension(this.OriginalContent.Filename, "tmp"));
+            MediaFile outputFile = new MediaFile(outputWavFile);
             engine.Convert(this.OriginalContent, outputFile, opts);
           }
             // Pass the temp file for the MediaSegment 

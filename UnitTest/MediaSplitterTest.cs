@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using ContentCleaner.MediaManager;
 using MediaToolkit;
 using MediaToolkit.Model;
@@ -16,12 +17,23 @@ namespace UnitTest
     [Test]
     public void TestSplitIntoSegments()
     {
-      MediaFile mediaFile = new MediaFile("sample/RvB_s1_e04.m4v");
+      string movieFile = Path.Combine(TestContext.CurrentContext.TestDirectory, "sample", "RvB_s1_e04.m4v");
+      string subTitleFile = Path.Combine(TestContext.CurrentContext.TestDirectory, "sample", "RvB_s1_e04.srt");
+      MediaFile mediaFile = new MediaFile(movieFile);
 
-      string subTitleFile = "sample/Psych.2x02.65_Million_Years_Off.srt";
       MediaSplitter splitter = new MediaSplitter(mediaFile, subTitleFile, 0);
       splitter.SplitIntoSegments();
     }
-  
+
+    [Test]
+    public void TestSomething()
+    {
+      MediaFile mediaFile = new MediaFile("sample/RvB_s1_e04.m4v");
+
+      string subTitleFile = "sample/RvB_s1_e04.srt";
+      MediaSplitter splitter = new MediaSplitter(mediaFile, subTitleFile, 0);
+      splitter.SplitIntoSegments();
+    }
+
   }
 }
