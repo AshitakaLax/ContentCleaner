@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MediaSplitterTest.cs" />
+    <Compile Include="sphinxNet\SphinxTest.cs" />
     <Compile Include="SubtitleGrabbing.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -62,6 +63,10 @@
     <ProjectReference Include="..\ContentCleaner\ContentCleaner.csproj">
       <Project>{cece68ad-1eb5-4b94-befd-d1f8e890531b}</Project>
       <Name>ContentCleaner</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\sphinxNet\SphinxNet.csproj">
+      <Project>{835e3be7-5f84-4b4e-b7e9-1e138773ff08}</Project>
+      <Name>SphinxNet</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

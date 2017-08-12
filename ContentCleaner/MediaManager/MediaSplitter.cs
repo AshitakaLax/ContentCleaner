@@ -23,6 +23,7 @@ namespace ContentCleaner.MediaManager
       this.OriginalContent = contentFile;
       this.SrtSubtitleFile = srtSubtitleFile;
       this.StartEndBuffer = startEndBuffer;
+      this.Segments = new List<MediaSegment>();
     }
 
     /// <summary>
@@ -70,12 +71,12 @@ namespace ContentCleaner.MediaManager
             opts.CutMedia(TimeSpan.FromMilliseconds(item.StartTime), TimeSpan.FromMilliseconds(durationMilliseconds));
             MediaFile outputFile = new MediaFile(outputWavFile);
             engine.Convert(this.OriginalContent, outputFile, opts);
-          }
-            // Pass the temp file for the MediaSegment 
-//            MediaSegment segment = new MediaSegment();
+
+            MediaSegment segment = new MediaSegment(outputFile, item.Lines, TimeSpan.FromMilliseconds(item.StartTime), TimeSpan.FromMilliseconds(durationMilliseconds), itemIndex);
+            segment.ConvertWavFileToText();
+            this.Segments.Add(segment);
+          } 
         }
-        // Starttime is in milliseconds
-        // subtitles[0].StartTime;
       }
     }
 
