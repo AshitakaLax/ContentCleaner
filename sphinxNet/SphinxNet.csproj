@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandLineSphinx.cs" />
     <Compile Include="WrapSphinx.cs" />
     <Compile Include="PocketSphinx.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -51,10 +52,19 @@
     <Content Include="cmusphinx\pocketsphinx.pdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="cmusphinx\pocketsphinx_batch.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="cmusphinx\pocketsphinx_batch.pdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="cmusphinx\pocketsphinx_continuous.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="cmusphinx\pocketsphinx_continuous.pdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="cmusphinx\pocketsphinx_mdef_convert.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="cmusphinx\pocketsphinx_mdef_convert.pdb">
@@ -66,26 +76,107 @@
     <Content Include="cmusphinx\sphinxbase.pdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="cmusphinx\sphinx_cepview.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="cmusphinx\sphinx_cepview.pdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="cmusphinx\sphinx_fe.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="cmusphinx\sphinx_fe.pdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="cmusphinx\sphinx_jsgf2fsg.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="cmusphinx\sphinx_jsgf2fsg.pdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="cmusphinx\sphinx_lm_convert.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="cmusphinx\sphinx_lm_convert.pdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="cmusphinx\sphinx_pitch.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="cmusphinx\sphinx_pitch.pdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="cmusphinx\sphinx_seg.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="cmusphinx\sphinx_seg.pdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="cmusphinx\test\data\cards\001.wav" />
+    <Content Include="cmusphinx\test\data\cards\002.wav" />
+    <Content Include="cmusphinx\test\data\cards\003.wav" />
+    <Content Include="cmusphinx\test\data\cards\004.wav" />
+    <Content Include="cmusphinx\test\data\cards\005.wav" />
+    <Content Include="cmusphinx\test\data\goforward.raw">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="cmusphinx\test\data\librivox\sense_and_sensibility_01_austen_64kb-0870.wav" />
+    <Content Include="cmusphinx\test\data\librivox\sense_and_sensibility_01_austen_64kb-0880.wav" />
+    <Content Include="cmusphinx\test\data\librivox\sense_and_sensibility_01_austen_64kb-0890.wav" />
+    <Content Include="cmusphinx\test\data\librivox\sense_and_sensibility_01_austen_64kb-0920.wav" />
+    <Content Include="cmusphinx\test\data\librivox\sense_and_sensibility_01_austen_64kb-0930.wav" />
+    <Content Include="cmusphinx\test\data\numbers.raw">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="cmusphinx\test\data\something.raw">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="cmusphinx\test\data\tidigits\dhd.2934z.raw" />
+    <Content Include="cmusphinx\test\unit\test_acmod.c" />
+    <Content Include="cmusphinx\test\unit\test_acmod_grow.c" />
+    <Content Include="cmusphinx\test\unit\test_alignment.c" />
+    <Content Include="cmusphinx\test\unit\test_allphone.c" />
+    <Content Include="cmusphinx\test\unit\test_dict.c" />
+    <Content Include="cmusphinx\test\unit\test_dict2pid.c" />
+    <Content Include="cmusphinx\test\unit\test_fsg.c" />
+    <Content Include="cmusphinx\test\unit\test_fwdflat.c" />
+    <Content Include="cmusphinx\test\unit\test_fwdtree.c" />
+    <Content Include="cmusphinx\test\unit\test_fwdtree_bestpath.c" />
+    <Content Include="cmusphinx\test\unit\test_init.c" />
+    <Content Include="cmusphinx\test\unit\test_jsgf.c" />
+    <Content Include="cmusphinx\test\unit\test_keyphrase.c" />
+    <Content Include="cmusphinx\test\unit\test_lattice.c" />
+    <Content Include="cmusphinx\test\unit\test_lm_read.c" />
+    <Content Include="cmusphinx\test\unit\test_macros.h" />
+    <Content Include="cmusphinx\test\unit\test_mllr.c" />
+    <Content Include="cmusphinx\test\unit\test_nbest.c" />
+    <Content Include="cmusphinx\test\unit\test_posterior.c" />
+    <Content Include="cmusphinx\test\unit\test_ps.c" />
+    <Content Include="cmusphinx\test\unit\test_ptm_mgau.c" />
+    <Content Include="cmusphinx\test\unit\test_reinit.c" />
+    <Content Include="cmusphinx\test\unit\test_senfh.c" />
+    <Content Include="cmusphinx\test\unit\test_set_search.c" />
+    <Content Include="cmusphinx\test\unit\test_simple.c" />
+    <Content Include="cmusphinx\test\unit\test_state_align.c" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="cmusphinx\model\en-us\cmudict-en-us.dict">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="cmusphinx\model\en-us\en-us-phone.lm.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="cmusphinx\model\en-us\en-us.lm.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="cmusphinx\model\en-us\en-us\feat.params" />
+    <None Include="cmusphinx\model\en-us\en-us\mdef" />
+    <None Include="cmusphinx\model\en-us\en-us\means" />
+    <None Include="cmusphinx\model\en-us\en-us\noisedict" />
+    <None Include="cmusphinx\model\en-us\en-us\README" />
+    <None Include="cmusphinx\model\en-us\en-us\sendump" />
+    <None Include="cmusphinx\model\en-us\en-us\transition_matrices" />
+    <None Include="cmusphinx\model\en-us\en-us\variances" />
     <None Include="cmusphinx\pocketsphinx.exp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -128,6 +219,108 @@
     <None Include="cmusphinx\sphinx_seg.ilk">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="cmusphinx\test\compare_table.pl" />
+    <None Include="cmusphinx\test\data\an4_ci_cont\feat.params" />
+    <None Include="cmusphinx\test\data\an4_ci_cont\mdef" />
+    <None Include="cmusphinx\test\data\an4_ci_cont\means" />
+    <None Include="cmusphinx\test\data\an4_ci_cont\mixture_weights" />
+    <None Include="cmusphinx\test\data\an4_ci_cont\noisedict" />
+    <None Include="cmusphinx\test\data\an4_ci_cont\transition_matrices" />
+    <None Include="cmusphinx\test\data\an4_ci_cont\variances" />
+    <None Include="cmusphinx\test\data\cards\cards.fileids" />
+    <None Include="cmusphinx\test\data\cards\cards.gram" />
+    <None Include="cmusphinx\test\data\cards\cards.hyp" />
+    <None Include="cmusphinx\test\data\cards\cards.transcription" />
+    <None Include="cmusphinx\test\data\defective.dic">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="cmusphinx\test\data\defective.gram">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="cmusphinx\test\data\goforward.fsg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="cmusphinx\test\data\goforward.gram">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="cmusphinx\test\data\goforward.kws">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="cmusphinx\test\data\goforward.mfc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="cmusphinx\test\data\librivox\fileids" />
+    <None Include="cmusphinx\test\data\librivox\test-lm.match" />
+    <None Include="cmusphinx\test\data\librivox\transcription" />
+    <None Include="cmusphinx\test\data\mllr_matrices">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="cmusphinx\test\data\test.lmctl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="cmusphinx\test\data\tidigits\hmm\feat.params" />
+    <None Include="cmusphinx\test\data\tidigits\hmm\mdef" />
+    <None Include="cmusphinx\test\data\tidigits\hmm\means" />
+    <None Include="cmusphinx\test\data\tidigits\hmm\sendump" />
+    <None Include="cmusphinx\test\data\tidigits\hmm\transition_matrices" />
+    <None Include="cmusphinx\test\data\tidigits\hmm\variances" />
+    <None Include="cmusphinx\test\data\tidigits\lm\tidigits.dic" />
+    <None Include="cmusphinx\test\data\tidigits\lm\tidigits.fsg" />
+    <None Include="cmusphinx\test\data\tidigits\lm\tidigits.lm.bin" />
+    <None Include="cmusphinx\test\data\tidigits\man.ah.111a.mfc" />
+    <None Include="cmusphinx\test\data\tidigits\man.ah.1b.mfc" />
+    <None Include="cmusphinx\test\data\tidigits\man.ah.2934za.mfc" />
+    <None Include="cmusphinx\test\data\tidigits\man.ah.35oa.mfc" />
+    <None Include="cmusphinx\test\data\tidigits\man.ah.3oa.mfc" />
+    <None Include="cmusphinx\test\data\tidigits\man.ah.4625a.mfc" />
+    <None Include="cmusphinx\test\data\tidigits\man.ah.588zza.mfc" />
+    <None Include="cmusphinx\test\data\tidigits\man.ah.63a.mfc" />
+    <None Include="cmusphinx\test\data\tidigits\man.ah.6o838a.mfc" />
+    <None Include="cmusphinx\test\data\tidigits\man.ah.75913a.mfc" />
+    <None Include="cmusphinx\test\data\tidigits\man.ah.844o1a.mfc" />
+    <None Include="cmusphinx\test\data\tidigits\man.ah.8b.mfc" />
+    <None Include="cmusphinx\test\data\tidigits\man.ah.9b.mfc" />
+    <None Include="cmusphinx\test\data\tidigits\man.ah.o789a.mfc" />
+    <None Include="cmusphinx\test\data\tidigits\man.ah.z4548a.mfc" />
+    <None Include="cmusphinx\test\data\tidigits\man.ah.zb.mfc" />
+    <None Include="cmusphinx\test\data\tidigits\test-tidigits-fsg.match" />
+    <None Include="cmusphinx\test\data\tidigits\test-tidigits-simple.match" />
+    <None Include="cmusphinx\test\data\tidigits\tidigits.ctl" />
+    <None Include="cmusphinx\test\data\tidigits\tidigits.lsn" />
+    <None Include="cmusphinx\test\data\tidigits\woman.ak.1b.mfc" />
+    <None Include="cmusphinx\test\data\tidigits\woman.ak.276317oa.mfc" />
+    <None Include="cmusphinx\test\data\tidigits\woman.ak.334a.mfc" />
+    <None Include="cmusphinx\test\data\tidigits\woman.ak.3z3z9a.mfc" />
+    <None Include="cmusphinx\test\data\tidigits\woman.ak.48z66zza.mfc" />
+    <None Include="cmusphinx\test\data\tidigits\woman.ak.532a.mfc" />
+    <None Include="cmusphinx\test\data\tidigits\woman.ak.5z874a.mfc" />
+    <None Include="cmusphinx\test\data\tidigits\woman.ak.6728za.mfc" />
+    <None Include="cmusphinx\test\data\tidigits\woman.ak.75a.mfc" />
+    <None Include="cmusphinx\test\data\tidigits\woman.ak.84983a.mfc" />
+    <None Include="cmusphinx\test\data\tidigits\woman.ak.8a.mfc" />
+    <None Include="cmusphinx\test\data\tidigits\woman.ak.99731a.mfc" />
+    <None Include="cmusphinx\test\data\tidigits\woman.ak.o69a.mfc" />
+    <None Include="cmusphinx\test\data\tidigits\woman.ak.ooa.mfc" />
+    <None Include="cmusphinx\test\data\tidigits\woman.ak.za.mfc" />
+    <None Include="cmusphinx\test\data\turtle.dic">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="cmusphinx\test\data\turtle.lm.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="cmusphinx\test\data\unreachable.lat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="cmusphinx\test\Makefile.am" />
+    <None Include="cmusphinx\test\regression\Makefile.am" />
+    <None Include="cmusphinx\test\regression\test-cards.sh" />
+    <None Include="cmusphinx\test\regression\test-lm.sh" />
+    <None Include="cmusphinx\test\regression\test-tidigits-fsg.sh" />
+    <None Include="cmusphinx\test\regression\test-tidigits-simple.sh" />
+    <None Include="cmusphinx\test\testfuncs.sh.in" />
+    <None Include="cmusphinx\test\testfuncs_cygwin.sh" />
+    <None Include="cmusphinx\test\unit\Makefile.am" />
+    <None Include="cmusphinx\test\word_align.pl" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

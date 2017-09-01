@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace SphinxNet
 {
-
   public class PocketSphinx
   {
     
