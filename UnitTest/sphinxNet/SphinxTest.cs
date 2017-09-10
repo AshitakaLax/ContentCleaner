@@ -91,9 +91,87 @@ namespace UnitTest
       Assert.IsTrue(!string.IsNullOrEmpty(sphinx.ProcessOutput));
     }
 
+    [Test]
     public void TestKeyWordParseing()
     {
+      string audioFile = Path.Combine(TestContext.CurrentContext.TestDirectory, "sample", "helloWorld.m4a");
 
+      MediaFile mediaFile = new MediaFile(audioFile);
+
+      string singleChWavFile = Path.Combine(TestContext.CurrentContext.TestDirectory, "sample", "testingOneTwoThree.wav");
+
+      // based on the Item Create a new media file for use
+      using (Engine engine = new Engine())
+      {
+        ConversionOptions opts = new ConversionOptions();
+        ConversionOptions secondOpts = new ConversionOptions();
+        engine.GetMetadata(mediaFile);
+
+        // TimeSpan mediaDuration = mediaFile.Metadata.Duration;
+        // TimeSpan halfDuration = new TimeSpan(mediaDuration.Ticks / 5);
+        opts.EnableAudioDownMixing = true;
+        opts.AudioSampleRate = AudioSampleRate.Hz16000;
+
+        MediaFile outputFile = new MediaFile(singleChWavFile);
+        engine.Convert(mediaFile, outputFile, opts);
+        engine.GetMetadata(outputFile);
+        Assert.AreEqual("mono", outputFile.Metadata.AudioData.ChannelOutput);
+      }
+
+      string cmuSphinxDir = Path.Combine(TestContext.CurrentContext.TestDirectory, "cmusphinx");
+      string pocketSphinxExe = Path.Combine(cmuSphinxDir, "pocketsphinx_continuous.exe");
+      string modelFile = Path.Combine(cmuSphinxDir, "model", "en-us", "en-us");
+      string languageModelFile = Path.Combine(cmuSphinxDir, "model", "en-us", "en-us.lm.bin");
+      string dictionary = Path.Combine(cmuSphinxDir, "model", "en-us", "cmudict-en-us.dict");
+      SphinxOptions options = new SphinxOptions();
+      //options.KeyPhrases.Add("hello world");
+      //options.KeyPhrasesThreshold = "1e-40";
+
+      CommandLineSphinx sphinx = new CommandLineSphinx(pocketSphinxExe, cmuSphinxDir);
+      int exitCode = sphinx.ScanAudioFile(singleChWavFile, modelFile, languageModelFile, dictionary, options);
+
+      Assert.IsTrue(!string.IsNullOrEmpty(sphinx.ProcessOutput));
+    }
+
+    [Test]
+    public void TestKeyWordParsing()
+    {
+      string audioFile = Path.Combine(TestContext.CurrentContext.TestDirectory, "sample", "oneTwoThree.wav");
+
+      string cmuSphinxDir = Path.Combine(TestContext.CurrentContext.TestDirectory, "cmusphinx");
+      string pocketSphinxExe = Path.Combine(cmuSphinxDir, "pocketsphinx_continuous.exe");
+      string modelFile = Path.Combine(cmuSphinxDir, "model", "en-us", "en-us");
+      string languageModelFile = Path.Combine(cmuSphinxDir, "model", "en-us", "en-us.lm.bin");
+      string dictionary = Path.Combine(cmuSphinxDir, "model", "en-us", "cmudict-en-us.dict");
+      SphinxOptions options = new SphinxOptions();
+      //options.KeyPhrases.Add("hello world");
+      //options.KeyPhrasesThreshold = "1e-40";
+
+      CommandLineSphinx sphinx = new CommandLineSphinx(pocketSphinxExe, cmuSphinxDir);
+      int exitCode = sphinx.ScanAudioFile(audioFile, modelFile, languageModelFile, dictionary, options);
+      string expectedResults = "one two three hello world";
+      Assert.AreEqual(expectedResults, sphinx.ProcessOutput);
+    }
+
+    [Test]
+    public void TestKeyWordSearchParsing()
+    {
+      string audioFile = Path.Combine(TestContext.CurrentContext.TestDirectory, "sample", "oneTwoThree.wav");
+
+      string cmuSphinxDir = Path.Combine(TestContext.CurrentContext.TestDirectory, "cmusphinx");
+      string pocketSphinxExe = Path.Combine(cmuSphinxDir, "pocketsphinx_continuous.exe");
+      string modelFile = Path.Combine(cmuSphinxDir, "model", "en-us", "en-us");
+      string languageModelFile = Path.Combine(cmuSphinxDir, "model", "en-us", "en-us.lm.bin");
+      string dictionary = Path.Combine(cmuSphinxDir, "model", "en-us", "cmudict-en-us.dict");
+      SphinxOptions options = new SphinxOptions();
+      options.KeyPhrases.Add("two three");
+      options.KeyPhrasesThreshold = "1e-40";
+      options.TimeFlag = true;
+
+      CommandLineSphinx sphinx = new CommandLineSphinx(pocketSphinxExe, cmuSphinxDir);
+      int exitCode = sphinx.ScanAudioFile(audioFile, modelFile, languageModelFile, dictionary, options);
+      string expectedResults = "one two three hello world";
+      Assert.AreEqual(expectedResults, sphinx.ProcessOutput);
     }
   }
 }

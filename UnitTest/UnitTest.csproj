@@ -76,6 +76,12 @@
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="sample\helloWorld.m4a">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sample\oneTwoThree.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="sample\RvB_s1_e04.m4v">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
