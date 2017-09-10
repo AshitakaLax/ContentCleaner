@@ -169,7 +169,8 @@ namespace UnitTest
       options.TimeFlag = true;
 
       CommandLineSphinx sphinx = new CommandLineSphinx(pocketSphinxExe, cmuSphinxDir);
-      int exitCode = sphinx.ScanAudioFile(audioFile, modelFile, languageModelFile, dictionary, options);
+      //int exitCode = sphinx.ScanAudioFile(audioFile, modelFile, languageModelFile, dictionary, options);
+      SphinxResult result = sphinx.Scan(audioFile, modelFile, languageModelFile, dictionary, options);
       string expectedResults = "one two three hello world";
       Assert.AreEqual(expectedResults, sphinx.ProcessOutput);
     }
