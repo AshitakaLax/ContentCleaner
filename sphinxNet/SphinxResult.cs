@@ -20,6 +20,7 @@ namespace SphinxNet
       this.OutputString = outputString;
       this.Options = options;
       this.ExitCode = exitCode;
+      this.Words = new List<SphinxWord>();
 
       this.ParseOutput();
     }
@@ -30,6 +31,8 @@ namespace SphinxNet
 
     public string OutputString { get; private set; }
     public SphinxOptions Options{ get; private set; }
+
+    public List<SphinxWord> Words { get; set; }
 
     public string Text { get; private set; }
 
@@ -56,7 +59,6 @@ namespace SphinxNet
         string remainingText = this.OutputString.Substring(index);
         List<string> listOfWords = new List<string>(this.Text.Split(' '));
 
-        List<Tuple<string, double, double, double>> wordTiming = new List<Tuple<string, double, double, double>>();
         foreach (string word in listOfWords)
         {
           int wordIndex = remainingText.IndexOf(word);
@@ -65,7 +67,14 @@ namespace SphinxNet
           if(wordIndex > 0)
           {
             string currentWord = word;
+
+            // check if there are any parenthesis
             remainingText = remainingText.Substring(word.Length).TrimStart(' ');
+            if (remainingText[0] == '(')
+            {
+              remainingText = remainingText.Substring(remainingText.IndexOf(')')+2);
+            }
+
             string startTimeStr = remainingText.Substring(0, remainingText.IndexOf(' '));
 
             remainingText = remainingText.Substring(startTimeStr.Length).TrimStart(' ');
@@ -77,17 +86,10 @@ namespace SphinxNet
             double startingTime = Double.Parse(startTimeStr);
             double endTime = Double.Parse(endTimeStr);
             double durationTime = Double.Parse(durationStr);
-            wordTiming.Add(new Tuple<string, double, double, double>(currentWord, startingTime, endTime, durationTime));
+            this.Words.Add(new SphinxWord(currentWord, startingTime, endTime, durationTime));
           }
         }
-
-
-
       }
-
-
     }
-
-    
   }
 }

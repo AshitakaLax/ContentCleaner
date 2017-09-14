@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommandLineSphinx.cs" />
+    <Compile Include="SphinxWord.cs" />
     <Compile Include="SphinxResult.cs" />
     <Compile Include="SphinxOptions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
